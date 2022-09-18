@@ -1,10 +1,12 @@
 // https://www.youtube.com/watch?v=Aca6mAXi0j4
 // https://www.youtube.com/watch?v=yc0TYlnZIp4
-// snippet useEffect - uef
+// snippet useEffect - uef/usf
 import React, { useEffect, useState } from 'react';
 import { getApiIBGE } from '../../services/ibge';
+import PropTypes from 'prop-types';
 
-export const DropStates = () => {
+// caso ele não seja passado por default passarei um função vazia
+export const DropStates = ({ id, name, onChange = () => {} }) => {
   const [arrStates, setStates] = useState([]);
 
   useEffect(() => {
@@ -31,14 +33,17 @@ export const DropStates = () => {
   // involking function orderState
   orderStates(arrStates);
   return (
-    <select name="" id="uf_id">
+    <select id={id || name} name={name || id} onChange={onChange}>
+      <option value="selecione" name="selecione" onChange={onChange}>
+        Selecione estado...
+      </option>
       {arrStates &&
         arrStates.map(function (data, idx) {
           return (
             <option
               value={data.sigla}
               key={idx + 1}
-              selected={data.nome === 'Maranhão'}
+              // selected={data.nome === 'Maranhão'}
             >
               {data.nome}
             </option>
@@ -46,4 +51,10 @@ export const DropStates = () => {
         })}
     </select>
   );
+};
+
+DropStates.propTypes = {
+  onChange: PropTypes.func,
+  id: PropTypes.string,
+  name: PropTypes.string,
 };
