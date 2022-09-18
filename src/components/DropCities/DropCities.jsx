@@ -3,8 +3,9 @@
 // snippet useEffect - uef
 import React, { useEffect, useState } from 'react';
 import { getApiIBGE } from '../../services/ibge';
+import PropTypes from 'prop-types';
 
-export const DropCities = () => {
+export const DropCities = ({ id, name, state, onChange = () => {} }) => {
   const [arrCities, setCities] = useState([]);
 
   useEffect(() => {
@@ -13,40 +14,38 @@ export const DropCities = () => {
         const returnCities = await getApiIBGE(
           `/localidades/estados/${state}/municipios`
         );
+
         setCities(returnCities);
       };
-
-      fetDataCitiesState('MA');
+      console.log('Como estado cheaga useEffect UPDARW', state);
+      if (state !== 'selecione...') fetDataCitiesState(state);
+      /**Logica: neste caso o estado sempre será diferente de selecione...
+       * quando a opção vier com value "selecione" o mesmo seta em branco e o
+       * estado retorna em branco fazendo com que o comboBox de city fique em
+       * branco que é o comportamento que queremos nesse contexto
+       */
     } catch (error) {
       console.log(`Erro useEffect Component State ${error}`);
     }
-  }, []);
-
-  // const orderStates = arrStates => {
-  //   arrStates.sort(function (a, b) {
-  //     if (a.nome < b.nome) {
-  //       return -1;
-  //     } else {
-  //       return true;
-  //     }
-  //   });
-  // };
-  // orderStates(arrCities);
+  }, [state]);
 
   return (
-    <select name="" id="cidade_id" className="sl-drop-cities">
+    <select id={id || name} name={name || id} onChange={onChange}>
       {arrCities &&
-        arrCities.map(function (data, idx) {
+        arrCities.map(function (data) {
           return (
-            <option
-              value={data.sigla}
-              key={idx + 1}
-              selected={data.nome === 'Maranhão'}
-            >
+            <option value={data.id} key={data.id}>
               {data.nome}
             </option>
           );
         })}
     </select>
   );
+};
+
+DropCities.propTypes = {
+  state: PropTypes.string,
+  onChange: PropTypes.func,
+  id: PropTypes.string,
+  name: PropTypes.string,
 };
