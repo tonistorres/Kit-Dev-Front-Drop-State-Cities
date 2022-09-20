@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaConfluence } from 'react-icons/fa';
 import './Navbar.css';
-
+// https://www.youtube.com/watch?v=ctiDWDq7C8E
 export const Navbar = () => {
   return (
     <div className="Navbar">
