@@ -6,7 +6,7 @@
 
 body{
   align-items: center;
-  background-color: #1e1e1e;
+  background-color: #EDEDED;
   /* border: 2px solid red; */
   color: #e1e1e1;
   display: flex;
@@ -17,13 +17,26 @@ body{
 
 }
 
+.main-app{
+  align-items: center;
+  /* border: 4px solid wheat; */
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+}
+
 .container{
   align-items: center;
+  background-color: #071D41;
+  border-radius: 12px;
   display: flex;
   /* border: 2px solid green; */
+  flex-direction: column;
   justify-content: center;
-  width: 50vw;
-  height: 50vh;
+  width: 27vw;
+  height: 35vh;
 }
 
 .container form{
@@ -32,8 +45,8 @@ body{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 50%;
-  width: 50%;
+  height: 70%;
+  width: 80%;
 }
 
 .container form label{
@@ -58,7 +71,7 @@ body{
   margin: 5px 0 20px;
   outline: none;
   padding: 6px 0;
-  width: 80%;
+  width: 90%;
 
 }
 

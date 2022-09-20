@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DropStates } from './components/DropState/DropState';
 import { DropCities } from './components/DropCities/DropCities';
+import { Navbar } from './components/Navbar/Navbar';
 import './App.css';
 
 // snippet useEffect - uef/usf/sfc
@@ -21,18 +22,21 @@ export const App = () => {
     }
   };
   return (
-    <div className="container">
-      <form action="">
-        <label htmlFor="uf_id">UF:</label>
-        <DropStates onChange={handleInputChange} id="state" name="state" />
-        <label htmlFor="cidade_id">Cidade:</label>
-        <DropCities
-          state={formValue.state}
-          onChange={handleInputChange}
-          id="city"
-          name="city"
-        />
-      </form>
+    <div className="main-app">
+      <Navbar />
+      <div className="container">
+        <form>
+          <label htmlFor="uf_id">UF:</label>
+          <DropStates onChange={handleInputChange} id="state" name="state" />
+          <label htmlFor="cidade_id">Cidade:</label>
+          <DropCities
+            state={formValue.state}
+            onChange={handleInputChange}
+            id="city"
+            name="city"
+          />
+        </form>
+      </div>
     </div>
   );
 };
